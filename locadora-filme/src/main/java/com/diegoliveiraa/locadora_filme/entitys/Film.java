@@ -1,5 +1,6 @@
 package com.diegoliveiraa.locadora_filme.entitys;
 
+import com.diegoliveiraa.locadora_filme.dtos.FilmDTO;
 import com.diegoliveiraa.locadora_filme.infra.BaseEntity;
 import com.diegoliveiraa.locadora_filme.infra.FilmType;
 import jakarta.persistence.*;
@@ -39,6 +40,18 @@ public class Film extends BaseEntity {
     }
 
     public Film() {
+    }
+
+    public Film(FilmDTO data) {
+        super();
+        this.id = data.id();
+        this.title = data.title();
+        this.gender = data.gender();
+        this.releaseDate = data.releaseDate();
+        this.filmType = data.filmType();
+        this.quantity = data.quantity();
+        this.locationPrice = data.locationPrice();
+
     }
 
     public String getId() {
