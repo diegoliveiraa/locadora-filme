@@ -1,5 +1,6 @@
 package com.diegoliveiraa.locadora_filme.entitys;
 
+import com.diegoliveiraa.locadora_filme.dtos.UserDTO;
 import com.diegoliveiraa.locadora_filme.infra.BaseEntity;
 import com.diegoliveiraa.locadora_filme.infra.UserType;
 import jakarta.persistence.*;
@@ -52,6 +53,24 @@ public class User extends BaseEntity {
     }
 
     public User() {
+    }
+
+    public User(UserDTO data) {
+        super();
+        this.username = data.username();
+        this.password = data.password();
+        this.firstname = data.firstname();
+        this.lastname = data.lastname();
+        this.document = data.document();
+        this.phone = data.phone();
+        this.userType = data.userType();
+        this.cep = data.cep();
+        this.address = data.address();
+        this.number = data.number();
+        this.complement = data.complement();
+        this.city = data.city();
+        this.birthday = data.birthday();
+
     }
 
     public String getId() {
