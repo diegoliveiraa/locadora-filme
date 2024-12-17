@@ -3,10 +3,6 @@ package com.diegoliveiraa.locadora_filme.infra;
 import jakarta.persistence.MappedSuperclass;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import java.time.LocalDateTime;
 
@@ -23,5 +19,13 @@ public abstract class BaseEntity {
     @PreUpdate
     public void preUpdate() {
         this.timestamp = LocalDateTime.now();
+    }
+
+    public LocalDateTime getTimestamp() {
+        return this.timestamp;
+    }
+
+    public void setTimestamp(LocalDateTime timestamp) {
+        this.timestamp = timestamp;
     }
 }
