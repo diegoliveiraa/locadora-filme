@@ -1,4 +1,4 @@
 package com.diegoliveiraa.locadora_filme.dtos;
 
-public class LocationFilmDTO {
+public record LocationFilmDTO(String film, Long quantityLocated) {
 }
