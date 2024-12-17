@@ -1,7 +1,8 @@
 package com.diegoliveiraa.locadora_filme.entitys;
 
+import com.diegoliveiraa.locadora_filme.dtos.RenterDTO;
 import com.diegoliveiraa.locadora_filme.infra.BaseEntity;
-import com.diegoliveiraa.locadora_filme.infra.ClientStatus;
+import com.diegoliveiraa.locadora_filme.infra.RenterStatus;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
@@ -10,7 +11,7 @@ import java.util.Date;
 
 @Entity(name = "clients")
 @Table(name = "clients")
-public class Client extends BaseEntity {
+public class Renter extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -23,7 +24,7 @@ public class Client extends BaseEntity {
     private String document;
     private String phone;
     @Enumerated(EnumType.STRING)
-    private ClientStatus clientStatus;
+    private RenterStatus renterStatus;
     private String cep;
     private String address;
     private String number;
@@ -31,13 +32,13 @@ public class Client extends BaseEntity {
     private String city;
     private Date birthday;
 
-    public Client(String id, String firstname, String lastname, @NotBlank @Pattern(regexp = "\\d{11}", message = "Document must have exactly 11 digits") String document, String phone, ClientStatus clientStatus, String cep, String address, String number, String complement, String city, Date birthday) {
+    public Renter(String id, String firstname, String lastname, @NotBlank @Pattern(regexp = "\\d{11}", message = "Document must have exactly 11 digits") String document, String phone, RenterStatus renterStatus, String cep, String address, String number, String complement, String city, Date birthday) {
         this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;
         this.document = document;
         this.phone = phone;
-        this.clientStatus = clientStatus;
+        this.renterStatus = renterStatus;
         this.cep = cep;
         this.address = address;
         this.number = number;
@@ -46,7 +47,24 @@ public class Client extends BaseEntity {
         this.birthday = birthday;
     }
 
-    public Client() {
+    public Renter() {
+    }
+
+    public Renter(RenterDTO data) {
+        super();
+        this.firstname = data.firstname();
+        this.lastname = data.lastname();
+        this.document = data.document();
+        this.phone = data.phone();
+        this.renterStatus = data.renterStatus();
+        this.cep = data.cep();
+        this.address = data.address();
+        this.number = data.number();
+        this.complement = data.complement();
+        this.city = data.city();
+        this.birthday = data.birthday();
+
+
     }
 
     public String getId() {
@@ -69,8 +87,8 @@ public class Client extends BaseEntity {
         return this.phone;
     }
 
-    public ClientStatus getClientStatus() {
-        return this.clientStatus;
+    public RenterStatus getClientStatus() {
+        return this.renterStatus;
     }
 
     public String getCep() {
@@ -117,8 +135,8 @@ public class Client extends BaseEntity {
         this.phone = phone;
     }
 
-    public void setClientStatus(ClientStatus clientStatus) {
-        this.clientStatus = clientStatus;
+    public void setClientStatus(RenterStatus renterStatus) {
+        this.renterStatus = renterStatus;
     }
 
     public void setCep(String cep) {
@@ -147,8 +165,8 @@ public class Client extends BaseEntity {
 
     public boolean equals(final Object o) {
         if (o == this) return true;
-        if (!(o instanceof Client)) return false;
-        final Client other = (Client) o;
+        if (!(o instanceof Renter)) return false;
+        final Renter other = (Renter) o;
         if (!other.canEqual((Object) this)) return false;
         final Object this$id = this.getId();
         final Object other$id = other.getId();
@@ -157,7 +175,7 @@ public class Client extends BaseEntity {
     }
 
     protected boolean canEqual(final Object other) {
-        return other instanceof Client;
+        return other instanceof Renter;
     }
 
     public int hashCode() {
