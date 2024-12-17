@@ -16,21 +16,7 @@ public class UserService {
 
     public User createUser(UserDTO data) {
 
-        User newUser = new User();
-
-        newUser.setUsername(data.username());
-        newUser.setPassword(data.password());
-        newUser.setFirstname(data.firstname());
-        newUser.setLastname(data.lastname());
-        newUser.setDocument(data.document());
-        newUser.setPhone(data.phone());
-        newUser.setUserType(data.userType());
-        newUser.setCep(data.cep());
-        newUser.setAddress(data.address());
-        newUser.setNumber(data.number());
-        newUser.setComplement(data.complement());
-        newUser.setCity(data.city());
-        newUser.setBirthday(data.birthday());
+        User newUser = new User(data);
 
         this.userRepository.save(newUser);
 
@@ -64,13 +50,16 @@ public class UserService {
         return updateUser;
     }
 
-    public User deleteUser(UserDTO data) {
+    public void deleteUser(String id) {
 
-        User deleteUser = this.findByDocument(data.document());
+        User deleteUser = this.findById(id);
 
         this.userRepository.delete(deleteUser);
+    }
 
-        return deleteUser;
+    public User findById(String id) {
+        return this.userRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("User not found!"));
     }
 
     public User findByDocument(String document) {
