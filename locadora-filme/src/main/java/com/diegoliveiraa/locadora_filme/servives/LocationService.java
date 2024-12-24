@@ -119,7 +119,7 @@ public class LocationService {
                 .findOverdueLocations(data.devolutionStatus().name(), currentDate);
         List<Film> overdueFilms = new ArrayList<>();
 
-        for (Location location : overdueLocations){
+        for (Location location : overdueLocations) {
             for (LocationFilm locationFilm : location.getLocationFilms()) {
                 overdueFilms.add(locationFilm.getFilmId());
             }
@@ -196,12 +196,13 @@ public class LocationService {
             );
         }
     }
+
     //Atualizar o status do Film
     public void updateFilm(LocationFilmDTO dataFilm) throws Exception {
 
-            Film film = this.filmService.findById(dataFilm.filmId());
-            film.setFilmStatus(dataFilm.filmStatus());
-            this.filmService.saveFilm(film);
+        Film film = this.filmService.findById(dataFilm.filmId());
+        film.setFilmStatus(dataFilm.filmStatus());
+        this.filmService.saveFilm(film);
     }
 
     //Atualizar o status do LocationFilm
