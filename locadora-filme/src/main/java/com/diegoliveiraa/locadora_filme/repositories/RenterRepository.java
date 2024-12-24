@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.Optional;
 
 public interface RenterRepository extends JpaRepository<Renter, String> {
-    Optional<Renter> findByDocument(String document);
+    Optional<Renter> findByDocumentOrName(String document, String name);
 
     Optional<Renter> findById(String id);
 }
