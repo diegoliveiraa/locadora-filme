@@ -30,7 +30,7 @@ public class RenterService {
 
     public Renter updateRenter(RenterDTO data) {
 
-        Renter updateRenter = this.findByDocument(data.document());
+        Renter updateRenter = this.findByDocumentOrName(data.document(), data.firstname());
 
         updateRenter.setFirstname(data.firstname());
         updateRenter.setLastname(data.lastname());
@@ -49,10 +49,11 @@ public class RenterService {
         return updateRenter;
     }
 
-    public void deleteRenter(String id) {
+    public Renter deleteRenter(String id) {
         Renter deleteRenter = this.findById(id);
 
         this.renterRepository.delete(deleteRenter);
+        return deleteRenter;
     }
 
     public Renter findById(String id) {
@@ -60,9 +61,9 @@ public class RenterService {
                 .orElseThrow(() -> new RuntimeException("Client not found"));
     }
 
-    public Renter findByDocument(String document) {
+    public Renter findByDocumentOrName(String document, String name) {
 
-        return this.renterRepository.findByDocument(document)
+        return this.renterRepository.findByDocumentOrName(document, name)
                 .orElseThrow(() -> new RuntimeException("Client not found!"));
     }
 
