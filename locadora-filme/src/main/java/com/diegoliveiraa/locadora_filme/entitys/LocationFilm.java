@@ -1,6 +1,7 @@
 package com.diegoliveiraa.locadora_filme.entitys;
 
 import com.diegoliveiraa.locadora_filme.infra.BaseEntity;
+import com.diegoliveiraa.locadora_filme.infra.DevolutionStatus;
 import jakarta.persistence.*;
 
 @Entity(name = "locationFilm")
@@ -13,19 +14,22 @@ public class LocationFilm extends BaseEntity {
 
     @ManyToOne
     @JoinColumn(name = "film_id", nullable = false)
-    private Film film;
+    private Film filmId;
 
     @ManyToOne
     @JoinColumn(name = "location_id", nullable = false)
-    private Location location;
+    private Location locationId;
+
+    @Enumerated(EnumType.STRING)
+    private DevolutionStatus devolutionStatus;
 
     @Column(name = "quantity_located", nullable = false)
     private Long quantityLocated;
 
-    public LocationFilm(String id, Film film, Location location, Long quantityLocated) {
+    public LocationFilm(String id, Film filmId, Location locationId, DevolutionStatus devolutionStatus, Long quantityLocated) {
         this.id = id;
-        this.film = film;
-        this.location = location;
+        this.filmId = filmId;
+        this.locationId = locationId;
         this.quantityLocated = quantityLocated;
     }
 
@@ -36,13 +40,15 @@ public class LocationFilm extends BaseEntity {
         return this.id;
     }
 
-    public Film getFilm() {
-        return this.film;
+    public Film getFilmId() {
+        return this.filmId;
     }
 
-    public Location getLocation() {
-        return this.location;
+    public Location getLocationId() {
+        return this.locationId;
     }
+
+    public DevolutionStatus getDevolutionStatus(){return this.devolutionStatus;}
 
     public Long getQuantityLocated() {
         return this.quantityLocated;
@@ -52,13 +58,15 @@ public class LocationFilm extends BaseEntity {
         this.id = id;
     }
 
-    public void setFilm(Film film) {
-        this.film = film;
+    public void setFilmId(Film filmId) {
+        this.filmId = filmId;
     }
 
-    public void setLocation(Location location) {
-        this.location = location;
+    public void setLocationId(Location locationId) {
+        this.locationId = locationId;
     }
+
+    public void setDevolutionStatus(DevolutionStatus devolutionStatus){this.devolutionStatus = devolutionStatus;}
 
     public void setQuantityLocated(Long quantityLocated) {
         this.quantityLocated = quantityLocated;
