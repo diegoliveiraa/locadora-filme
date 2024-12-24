@@ -42,10 +42,11 @@ public class FilmService {
         return updateFilm;
     }
 
-    public void deleteFilm(String id) {
+    public Film deleteFilm(String id) {
         Film deleteFilm = this.findById(id);
 
         this.filmRepository.delete(deleteFilm);
+        return deleteFilm;
     }
 
     public Film findByTitleOrGender(String title, String gender) {
