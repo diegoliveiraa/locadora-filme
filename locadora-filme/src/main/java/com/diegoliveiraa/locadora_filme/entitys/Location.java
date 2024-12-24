@@ -8,8 +8,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Entity(name = "locations")
@@ -22,11 +22,11 @@ public class Location extends BaseEntity {
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
-    private User user;
+    private User userId;
 
     @ManyToOne
     @JoinColumn(name = "renter_id", nullable = false)
-    private Renter renter;
+    private Renter renterId;
 
     @OneToMany(mappedBy = "location", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnoreProperties("location")
@@ -43,12 +43,12 @@ public class Location extends BaseEntity {
 
     private BigDecimal totalPayment;
 
-    private Date dateDevolution;
+    private LocalDateTime dateDevolution;
 
-    public Location(String id, User user, Renter renter, List<LocationFilm> locationFilms, PaymentType paymentType, PaymentStatus paymentStatus, DevolutionStatus devolutionStatus, BigDecimal totalPayment, Date dateDevolution) {
+    public Location(String id, User userId, Renter renterId, List<LocationFilm> locationFilms, PaymentType paymentType, PaymentStatus paymentStatus, DevolutionStatus devolutionStatus, BigDecimal totalPayment, LocalDateTime dateDevolution) {
         this.id = id;
-        this.user = user;
-        this.renter = renter;
+        this.userId = userId;
+        this.renterId = renterId;
         this.locationFilms = locationFilms;
         this.paymentType = paymentType;
         this.paymentStatus = paymentStatus;
@@ -64,12 +64,12 @@ public class Location extends BaseEntity {
         return this.id;
     }
 
-    public User getUser() {
-        return this.user;
+    public User getUserId() {
+        return this.userId;
     }
 
-    public Renter getRenter() {
-        return this.renter;
+    public Renter getRenterId() {
+        return this.renterId;
     }
 
     public List<LocationFilm> getLocationFilms() {
@@ -88,7 +88,7 @@ public class Location extends BaseEntity {
         return this.totalPayment;
     }
 
-    public Date getDateDevolution() {
+    public LocalDateTime getDateDevolution() {
         return this.dateDevolution;
     }
 
@@ -96,12 +96,12 @@ public class Location extends BaseEntity {
         this.id = id;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUserId(User userId) {
+        this.userId = userId;
     }
 
-    public void setRenter(Renter renter) {
-        this.renter = renter;
+    public void setRenterId(Renter renterId) {
+        this.renterId = renterId;
     }
 
     @JsonIgnoreProperties("location")
@@ -129,7 +129,7 @@ public class Location extends BaseEntity {
         this.totalPayment = totalPayment;
     }
 
-    public void setDateDevolution(Date dateDevolution) {
+    public void setDateDevolution(LocalDateTime dateDevolution) {
         this.dateDevolution = dateDevolution;
     }
 
