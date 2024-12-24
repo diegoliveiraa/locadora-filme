@@ -48,7 +48,9 @@ public class LocationFilm extends BaseEntity {
         return this.locationId;
     }
 
-    public DevolutionStatus getDevolutionStatus(){return this.devolutionStatus;}
+    public DevolutionStatus getDevolutionStatus() {
+        return this.devolutionStatus;
+    }
 
     public Long getQuantityLocated() {
         return this.quantityLocated;
@@ -66,7 +68,9 @@ public class LocationFilm extends BaseEntity {
         this.locationId = locationId;
     }
 
-    public void setDevolutionStatus(DevolutionStatus devolutionStatus){this.devolutionStatus = devolutionStatus;}
+    public void setDevolutionStatus(DevolutionStatus devolutionStatus) {
+        this.devolutionStatus = devolutionStatus;
+    }
 
     public void setQuantityLocated(Long quantityLocated) {
         this.quantityLocated = quantityLocated;
