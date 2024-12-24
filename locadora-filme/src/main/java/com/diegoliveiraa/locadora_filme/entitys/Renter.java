@@ -87,7 +87,7 @@ public class Renter extends BaseEntity {
         return this.phone;
     }
 
-    public RenterStatus getClientStatus() {
+    public RenterStatus getRenterStatus() {
         return this.renterStatus;
     }
 
@@ -135,7 +135,7 @@ public class Renter extends BaseEntity {
         this.phone = phone;
     }
 
-    public void setClientStatus(RenterStatus renterStatus) {
+    public void setRenterStatus(RenterStatus renterStatus) {
         this.renterStatus = renterStatus;
     }
 
