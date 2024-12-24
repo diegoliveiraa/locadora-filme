@@ -34,7 +34,7 @@ public class FilmService {
         updateFilm.setGender(data.gender());
         updateFilm.setReleaseDate(data.releaseDate());
         updateFilm.setFilmType(data.filmType());
-        updateFilm.setQuantity(data.quantity());
+        updateFilm.setFilmStatus(data.filmStatus());
         updateFilm.setLocationPrice(data.locationPrice());
 
         this.filmRepository.save(updateFilm);
@@ -48,8 +48,8 @@ public class FilmService {
         this.filmRepository.delete(deleteFilm);
     }
 
-    public Film findByTitle(String title) {
-        return this.filmRepository.findByTitle(title)
+    public Film findByTitleOrGender(String title, String gender) {
+        return this.filmRepository.findByTitleOrGender(title, gender)
                 .orElseThrow(() -> new RuntimeException("Film not found!"));
     }
 
