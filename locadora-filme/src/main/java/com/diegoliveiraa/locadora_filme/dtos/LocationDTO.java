@@ -5,12 +5,12 @@ import com.diegoliveiraa.locadora_filme.infra.PaymentStatus;
 import com.diegoliveiraa.locadora_filme.infra.PaymentType;
 
 import java.math.BigDecimal;
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
-public record LocationDTO(String id, String user, String renter
+public record LocationDTO(String id, String userId, String renterId
         , List<LocationFilmDTO> film
         , PaymentType paymentType, PaymentStatus paymentStatus, DevolutionStatus devolutionStatus
-        , BigDecimal totalPayment, Date dateDevolution) {
+        , BigDecimal totalPayment, LocalDateTime dateDevolution) {
 }
 
