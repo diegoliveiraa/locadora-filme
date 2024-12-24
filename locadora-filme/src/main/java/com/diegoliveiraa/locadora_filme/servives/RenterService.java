@@ -2,6 +2,7 @@ package com.diegoliveiraa.locadora_filme.servives;
 
 import com.diegoliveiraa.locadora_filme.dtos.RenterDTO;
 import com.diegoliveiraa.locadora_filme.entitys.Renter;
+import com.diegoliveiraa.locadora_filme.infra.RenterStatus;
 import com.diegoliveiraa.locadora_filme.repositories.RenterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,7 +15,7 @@ public class RenterService {
     @Autowired
     private RenterRepository renterRepository;
 
-    public Renter createClient(RenterDTO data) {
+    public Renter createRenter(RenterDTO data) {
 
         Renter newRenter = new Renter(data);
 
@@ -23,11 +24,11 @@ public class RenterService {
         return newRenter;
     }
 
-    public List<Renter> getAllClient() {
+    public List<Renter> getAllRenter() {
         return this.renterRepository.findAll();
     }
 
-    public Renter updateClient(RenterDTO data) {
+    public Renter updateRenter(RenterDTO data) {
 
         Renter updateRenter = this.findByDocument(data.document());
 
@@ -35,7 +36,7 @@ public class RenterService {
         updateRenter.setLastname(data.lastname());
         updateRenter.setDocument(data.document());
         updateRenter.setPhone(data.phone());
-        updateRenter.setClientStatus(data.renterStatus());
+        updateRenter.setRenterStatus(data.renterStatus());
         updateRenter.setCep(data.cep());
         updateRenter.setAddress(data.address());
         updateRenter.setNumber(data.number());
@@ -48,7 +49,7 @@ public class RenterService {
         return updateRenter;
     }
 
-    public void deleteClient(String id) {
+    public void deleteRenter(String id) {
         Renter deleteRenter = this.findById(id);
 
         this.renterRepository.delete(deleteRenter);
@@ -63,5 +64,13 @@ public class RenterService {
 
         return this.renterRepository.findByDocument(document)
                 .orElseThrow(() -> new RuntimeException("Client not found!"));
+    }
+
+    public void checkRenterStatus(String id) {
+        Renter renter = this.findById(id);
+
+        if (renter.getRenterStatus() == RenterStatus.INATIVE) {
+            throw new IllegalArgumentException("Renter is not authorized!");
+        }
     }
 }
