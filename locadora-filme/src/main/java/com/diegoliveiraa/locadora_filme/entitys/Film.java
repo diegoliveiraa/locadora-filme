@@ -2,6 +2,7 @@ package com.diegoliveiraa.locadora_filme.entitys;
 
 import com.diegoliveiraa.locadora_filme.dtos.FilmDTO;
 import com.diegoliveiraa.locadora_filme.infra.BaseEntity;
+import com.diegoliveiraa.locadora_filme.infra.FilmStatus;
 import com.diegoliveiraa.locadora_filme.infra.FilmType;
 import jakarta.persistence.*;
 
@@ -17,24 +18,29 @@ public class Film extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
+
+    @Column(unique = true, nullable = false)
+    private String serialNumber;
+
     private String title;
     private String gender;
     private LocalDate releaseDate;
     @Enumerated(EnumType.STRING)
     private FilmType filmType;
-    private Long quantity;
+    private FilmStatus filmStatus;
     private BigDecimal locationPrice;
 
     @OneToMany(mappedBy = "films", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<LocationFilm> locationFilms = new ArrayList<>();
 
-    public Film(String id, String title, String gender, LocalDate releaseDate, FilmType filmType, Long quantity, BigDecimal locationPrice, List<LocationFilm> locationFilms) {
+    public Film(String id, String serialNumber, String title, String gender, LocalDate releaseDate, FilmType filmType, FilmStatus filmStatus, BigDecimal locationPrice, List<LocationFilm> locationFilms) {
         this.id = id;
+        this.serialNumber = serialNumber;
         this.title = title;
         this.gender = gender;
         this.releaseDate = releaseDate;
         this.filmType = filmType;
-        this.quantity = quantity;
+        this.filmStatus = filmStatus;
         this.locationPrice = locationPrice;
         this.locationFilms = locationFilms;
     }
@@ -45,17 +51,22 @@ public class Film extends BaseEntity {
     public Film(FilmDTO data) {
         super();
         this.id = data.id();
+        this.serialNumber = data.serialNumber();
         this.title = data.title();
         this.gender = data.gender();
         this.releaseDate = data.releaseDate();
         this.filmType = data.filmType();
-        this.quantity = data.quantity();
+        this.filmStatus = data.filmStatus();
         this.locationPrice = data.locationPrice();
 
     }
 
     public String getId() {
         return this.id;
+    }
+
+    public String getSerialNumber() {
+        return this.serialNumber;
     }
 
     public String getTitle() {
@@ -74,8 +85,8 @@ public class Film extends BaseEntity {
         return this.filmType;
     }
 
-    public Long getQuantity() {
-        return this.quantity;
+    public FilmStatus getFilmStatus() {
+        return this.filmStatus;
     }
 
     public BigDecimal getLocationPrice() {
@@ -88,6 +99,10 @@ public class Film extends BaseEntity {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public void setSerialNumber(String serialNumber) {
+        this.serialNumber = serialNumber;
     }
 
     public void setTitle(String title) {
@@ -106,8 +121,8 @@ public class Film extends BaseEntity {
         this.filmType = filmType;
     }
 
-    public void setQuantity(Long quantity) {
-        this.quantity = quantity;
+    public void setFilmStatus(FilmStatus filmStatus) {
+        this.filmStatus = filmStatus;
     }
 
     public void setLocationPrice(BigDecimal locationPrice) {
