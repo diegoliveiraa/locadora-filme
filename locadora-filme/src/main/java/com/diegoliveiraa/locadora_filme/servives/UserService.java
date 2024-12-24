@@ -29,7 +29,7 @@ public class UserService {
 
     public User updateUser(UserDTO data) {
 
-        User updateUser = this.findByDocument(data.document());
+        User updateUser = this.findByDocumentOrName(data.document(), data.firstname());
 
         updateUser.setUsername(data.username());
         updateUser.setPassword(data.password());
@@ -50,11 +50,12 @@ public class UserService {
         return updateUser;
     }
 
-    public void deleteUser(String id) {
+    public User deleteUser(String id) {
 
         User deleteUser = this.findById(id);
 
         this.userRepository.delete(deleteUser);
+        return deleteUser;
     }
 
     public User findById(String id) {
@@ -62,8 +63,8 @@ public class UserService {
                 .orElseThrow(() -> new RuntimeException("User not found!"));
     }
 
-    public User findByDocument(String document) {
-        return this.userRepository.findByDocument(document)
+    public User findByDocumentOrName(String document, String name) {
+        return this.userRepository.findByDocumentOrName(document, name)
                 .orElseThrow(() -> new RuntimeException("User not found!"));
     }
 }
